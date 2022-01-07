@@ -39,4 +39,66 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    ////// find element only occuring once ,others are occuring twice
+    
+    
+    
+         /*   int count=0;
+        for(int i=0;i<nums.size();i++){
+            count=0;
+            for(int j=0;j<nums.size();j++){
+                if(nums[i]==nums[j])
+                    count++;
+            }
+            if(count==1)
+                return nums[i];
+        }
+        return -1;
+       
+       
+       
+       
+       
+       //THIS METHOD SHOLUD BE RIGHT NLOGN+N   UNALBLE TO FIND ERROR
+        sort(nums.begin(),nums.end());
+        //for(int i=0;i<nums.size();i++){
+        //cout<<nums[i]<<" ";
+        //}
+        
+        if(nums.size()==1) return nums[0];
+        if(nums[0]!=nums[1])
+            return nums[0];
+        if(nums.size()-1!=nums.size()-2)
+            return nums.size()-1;
+        for(int i=1;i<nums.size()-1;i++){
+            cout<<nums[i]<<endl;
+            if(nums[i+1]==nums[i] || nums[i-1]==nums[i] ){
+                cout<<nums[i]<<endl;
+                continue;
+            }
+            else{
+                cout<<nums[i]<<endl;
+                return nums[i];
+                }
+            }
+    return -1;
+    
+    */
+    
+    
+    
+    
    
