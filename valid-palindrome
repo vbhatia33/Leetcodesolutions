@@ -1,0 +1,26 @@
+   // First SOLUTION 0(N) 8ms
+   
+   bool isPalindrome(string s) {
+        transform(s.begin(), s.end(), s.begin(), ::tolower);
+        int i=0;
+        int j=s.length();
+        if(j==0) return true;
+        if(j==1) return true;
+        while(i<j){
+            if(!isalnum(s[i]))
+                i++;
+            else if (!isalnum(s[j]))
+                j--;
+            else if(s[i]==s[j]){
+                i++;
+                j--;
+            }
+            else 
+                return false;
+                
+        }
+        return true;
+    }
+};
+
+//
