@@ -1,0 +1,22 @@
+   // Simple brute force faster than 100%
+   bool isHappy(int n) {
+        //long long sum=0;
+        int a=0;
+        //if(n==0)  return false;
+        if(n==1)  return true;
+        while(n>6){
+            int sum=0;
+            if(n==1)
+                return true;
+            while(n>0){
+                int a=0;
+                
+                a=n%10;
+                sum+=(a*a);
+                n=n/10;
+            }
+            n=sum;
+        }
+        if(n==1)  return true;
+        return false;
+    }
