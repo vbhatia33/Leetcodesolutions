@@ -1,0 +1,25 @@
+// this method is based on conversion to strings and then iteratinf through all chr (11ms)
+      int hammingWeight(uint32_t n) {
+    string bin=bitset<32>(n).to_string();
+    int count=0;
+    for(int i=0;i<32;i++){
+        if(bin[i]=='1')
+            count++;
+    }
+    return count;
+    
+    }
+    
+    // now this method operates on principle of right shift and checking rightmost bit and terminate as no become zero
+        int hammingWeight(uint32_t n) {
+    int count=0;
+    while(n!=0){
+        if(n&1)
+            count++;
+        n=n>>1;
+    }
+        return count;
+    }
+    
+    
+    
