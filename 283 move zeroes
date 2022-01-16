@@ -1,0 +1,16 @@
+// not optimized solution  575 ms puerly brute force
+    void moveZeroes(vector<int>& nums) {
+        int k=nums.size();
+        int i=0;
+        while(i<k){
+            if(nums[i]==0){
+                for(int j=i+1;j<nums.size();j++){
+                    nums[j-1]=nums[j];
+                    
+                }
+                k--;
+                nums[nums.size()-1]=0;
+            }
+            if(nums[i]!=0)  i++;
+        }
+    }
