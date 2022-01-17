@@ -8,3 +8,14 @@
         c=c^(t[i]);
         return c;
     }
+    
+    
+    //2nd method using ascii addition and substraction
+            int i=0,b=0,a=0;
+        for(i;i<s.length();i++){
+            a+=s[i];
+            b+=t[i];
+        }
+        b+=t[t.length()-1];
+        return char(b-a);
+    }    
