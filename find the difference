@@ -1,0 +1,10 @@
+  100% 0ms using bitwise operator 
+   char findTheDifference(string s, string t) {
+        char c;
+        int i=0;
+        for(i;i<s.length();i++ ){
+            c=c^(s[i]^t[i]);
+        }
+        c=c^(t[i]);
+        return c;
+    }
