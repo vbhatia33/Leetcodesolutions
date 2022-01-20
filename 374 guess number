@@ -1,0 +1,17 @@
+// first approach binary search 4ms (the binary search is most optimal solution dnt know why 4ms)
+    int guessNumber(int n) {
+        
+        int s=1,e=n;
+        long long pick;
+        while(s<=e){
+            pick=(e-s)/2+s;
+            if(guess(pick)==0)  return pick;
+            else if(guess(pick)==-1){
+                e=pick-1;
+            }
+            else
+                s=pick+1;
+        }
+        return pick;
+        
+    }
