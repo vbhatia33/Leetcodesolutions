@@ -1,0 +1,25 @@
+//simple traversal 0n 21ms
+    ListNode* reverseList(ListNode* head) {
+        if(!head || !head->next)    return head;
+        ListNode *prev=NULL;
+        ListNode *nex=head->next;
+         while(head){
+             head->next=prev;
+             prev=head;
+             head=nex;
+             if(nex)    nex=nex->next;
+         }
+        return prev;
+    }
+    
+    
+    // Recursive method , watch anuj bhaiya video if doubt
+        ListNode* reverseList(ListNode* head) {
+        if (!head || !(head -> next)) {
+            return head;
+        }
+        ListNode* node = reverseList(head -> next);
+        head -> next -> next = head;
+        head -> next = NULL;
+        return node;
+    }
