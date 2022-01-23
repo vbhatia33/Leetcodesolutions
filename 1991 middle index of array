@@ -1,0 +1,32 @@
+   //simple prefix and postfix
+   int findMiddleIndex(vector<int>& nums) {
+        int curr,leftsum=0,rightsum=0,sum=0;
+        //for(int i=0;i<nums.size();i++){
+        //    sum=sum+nums[i];    
+        //}
+        sum=accumulate(nums.begin(), nums.end(), 0);
+        for(int j=0;j<nums.size();j++){
+            //curr=nums[j];
+            rightsum=sum-leftsum-nums[j];
+            if(leftsum==rightsum)   return j;
+            leftsum=leftsum+nums[j];
+        }
+        return -1;
+    }
+    
+    //solution using queue
+        int findMiddleIndex(vector<int>& nums) {
+        queue <int> q;
+        int sum=0,outsum=0,insum=0;
+        for(int i=0;i<nums.size();i++){
+            q.push(nums[i]);
+            sum+=nums[i];
+        }
+        for(int i=0;i<nums.size();i++){
+            insum=sum-outsum-q.front();
+            if(insum==outsum)   return i;
+            outsum=outsum+q.front();
+            q.pop();
+        }
+        return -1;
+    }
