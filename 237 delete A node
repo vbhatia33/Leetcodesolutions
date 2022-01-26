@@ -1,0 +1,30 @@
+    //naive approach
+    
+    void deleteNode(ListNode* node) {
+        ListNode *temp=node;
+        while(temp->next!=NULL){
+            temp->val=temp->next->val;
+            
+            if(temp->next->next==NULL){
+                ListNode *voila=temp->next;
+                temp->next=NULL;
+                delete voila;
+                return;
+            }
+            temp=temp->next;
+        }
+        //node=node->next;
+    }
+    
+    //copying the node
+        void deleteNode(ListNode* node) {
+        *node=*(node->next);
+    }
+    
+    //copying the data of next node and then changing the address
+    void deletNode(ListNode *node){
+      node->val=node->next->val;
+      node->next=temp;
+      node->next=node->next->next;
+      delete node;
+    }
