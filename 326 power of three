@@ -20,3 +20,6 @@
         bool a=isPowerOfThree( n/3);
         return a;
     }
+
+
+https://leetcode.com/problems/power-of-three/discuss/77859/1-line-C%2B%2B-no-recursionloop
