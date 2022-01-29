@@ -1,0 +1,27 @@
+//basic solution using bit manipulation 0(nlogn)
+    int ones(int a){
+        int one=0;
+        while(a){
+            if(a&1) one++;
+            a=a>>1;
+        }
+        return one;
+    }
+    vector<int> countBits(int n) {
+        vector<int>ans;
+        for(int i=0;i<=n;i++){
+            ans.push_back(ones(i));
+        }
+        return ans;
+    }
+    
+    //best solution - no of 1s any digit have is same as digit/2 because its just right shift . if digit is odd its digit/2 +1 as didgit/2 is integer division
+    ex= 13 has same one s as 6 and +1 at 1st place
+        vector<int> countBits(int n) {
+        vector<int> ans(n+1,0);
+        for(int i=1;i<=n;i++){
+            ans[i]=ans[i/2]+i%2;
+        }
+        return ans;
+    }
+ 
