@@ -1,0 +1,26 @@
+//pure brute force technique 
+
+class Solution {
+public:
+    bool valid(string allowed,string check){
+        bool a=true;
+        for(int i=0;i<check.length();i++){
+            int j=0;
+            for(;j<allowed.length();j++){
+                if(check[i]==allowed[j])    break;
+            }
+            if(j==allowed.length()) return false;
+        }
+        return true;
+    }
+    int countConsistentStrings(string allowed, vector<string>& words) {
+        int count=0;
+        for(int i=0;i<words.size();i++){
+            if(valid(allowed,words[i])) count++;
+        }
+        return count;
+                    
+
+        
+    }
+};
