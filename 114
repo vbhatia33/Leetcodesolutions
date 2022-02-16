@@ -1,0 +1,46 @@
+    Faster than 93%
+    
+    TreeNode *helper(TreeNode *root){
+        if(!root)   return NULL;
+        TreeNode *head,*tail;
+        if(!root->left && !root->right){
+            head=root;
+            tail=root;
+            return head;
+        }
+        else if(root->left && !root->right){
+            TreeNode *lefthead=helper(root->left);
+            head=root;
+            head->right=lefthead;
+            return head;
+        }
+        else if(!root->left && root->right){
+            TreeNode *righthead=helper(root->right);
+            head=root;
+            head->right=righthead;
+            return head;
+        }
+        else{
+            TreeNode *lefthead=helper(root->left);
+            TreeNode *righthead=helper(root->right);
+            head=root;
+            head->right=lefthead;
+            TreeNode*temp=head;
+            while(temp->right!=NULL){
+                temp=temp->right;
+            }
+            temp->right=righthead;
+            return head;
+        }
+        
+    }
+    
+    void flatten(TreeNode* root) {
+        root=helper(root);
+        TreeNode *temp=root;
+        while(temp!=NULL){
+            temp->left=NULL;
+            temp=temp->right;
+        }
+        
+    }
