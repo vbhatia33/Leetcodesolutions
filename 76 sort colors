@@ -1,0 +1,18 @@
+    100% on pass
+    void sortColors(vector<int>& nums) {
+        int on=0,z=0,t=nums.size()-1;
+        while(on<=t){
+            if(nums[on]==0){
+                swap(nums[on],nums[z]);
+                on++;
+                z++;
+            }
+            else if(nums[on]==1){
+                on++;
+            }
+            else{
+                swap(nums[on],nums[t]);
+                t--;
+            }
+        }
+    }
