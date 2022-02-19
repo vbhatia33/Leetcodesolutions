@@ -1,0 +1,27 @@
+my solution floyds cycle detection
+    bool hasCycle(ListNode *head) {
+        if(!head || !head->next )   return false;
+        ListNode *one,*two;
+        one=head;
+        two=head->next;
+        while(two && two->next){
+            two=two->next->next;
+            one=one->next;
+            if(two==one )    return true;
+        }
+        return false;
+    }
+    
+    
+    
+    //amazing solution single pointer it used the address criteria ie add of next node must be smaller than previous node
+    
+        bool hasCycle(ListNode *head) {
+        ListNode *current = head;
+        if(current == 0 || current->next == 0) return false;
+        while(current->next != 0){
+            if(current->next <= current) return true;
+            else current = current->next;
+        }
+        return false;
+    }
