@@ -1,0 +1,10 @@
+//using hash table 26%
+    ListNode *detectCycle(ListNode *head) {
+        unordered_map<ListNode*,int>m;
+        while(head){
+            if(m.count(head))   return head;
+            m[head]=1;
+            head=head->next;
+        }
+        return NULL;
+    }
