@@ -13,6 +13,18 @@ my solution floyds cycle detection
     }
     
     
+    //using hasmap 6%
+        bool hasCycle(ListNode *head) {
+        unordered_map<ListNode*,int>m;
+        while(head){
+            if(m.count(head))  return true;
+            m[head]=1;
+            head=head->next;
+        }
+        return false;
+        
+    }
+    
     
     //amazing solution single pointer it used the address criteria ie add of next node must be smaller than previous node
     
