@@ -8,3 +8,18 @@
         }
         return NULL;
     }
+    
+    //SPACE 0(1) USING THE SPECIAL METHOD OF ADDRESS
+        ListNode *detectCycle(ListNode *head) {
+        if(!head ||!head->next) return NULL;
+        ListNode *curr,*ans;
+        curr=head;
+        while(curr){
+            if(curr->next<=curr){
+                ans=curr->next;
+                return ans;
+            }
+            curr=curr->next;
+        }
+        return NULL;
+    }
