@@ -1,0 +1,38 @@
+//85% using two pointers
+    vector<int> sortedSquares(vector<int>& nums) {
+        int i=0;
+        vector<int> ans;
+        int n=nums.size();
+        if(nums[i]<0){
+            for(i;i<n;i++){
+                if(nums[i]>=0)  break;
+            }
+        }
+        int j=i;
+        i=i-1;
+        while(i>=0 && j<n){
+            int ele;
+                if(nums[i]*-1>nums[j]){
+                    ele=nums[j]*nums[j];
+                    j++;
+                }
+                else{
+                    ele=nums[i]*nums[i];
+                    i--;
+                }
+                ans.push_back(ele);
+            }
+            while(i>=0){
+                ans.push_back(nums[i]*nums[i]);
+                i--;
+            }
+            while(j<n){
+                ans.push_back(nums[j]*nums[j]);
+                j++;
+            }
+        return ans;
+        
+    }
+    
+    
+    
