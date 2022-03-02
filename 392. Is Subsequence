@@ -1,0 +1,19 @@
+// simple solution check every char ,100%
+    bool isSubsequence(string s, string t) {
+        int i=s.length(),j=t.length();
+        int a=0,b=0;
+        while(a<i and b<j){
+            if(s[a]==t[b]){
+                a++;
+                b++;
+            }
+            else{
+                b++;
+            }
+            if(a<i and b>=j){
+                return false;
+            }
+        }
+        if(a<i) return false;
+        return true;
+    }
