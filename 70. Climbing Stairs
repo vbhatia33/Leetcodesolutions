@@ -1,0 +1,26 @@
+//simple fibionacci using array
+    int climbStairs(int n) {
+         vector<long long>ans;
+        ans.push_back(1);
+        ans.push_back(2);
+        for(int i=2;i<=n;i++){
+            ans.push_back(ans[i-1]+ans[i-2]);
+        }
+        return ans[n-1];
+         return 0;   
+    }
+    
+    //fibionacci without array
+        int climbStairs(int n) {
+        if(n<3) return n;
+        long long a=1;
+        long long b=2;
+        long long ans;
+        for(int i=3;i<=n;i++){
+            ans=a+b;
+            a=b;
+            b=ans;
+        }
+        return ans;
+        
+    }
