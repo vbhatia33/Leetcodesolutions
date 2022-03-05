@@ -1,0 +1,45 @@
+//using height helper  68%
+    int height(TreeNode *root){
+        int ans=0;
+        if(!root)   return ans;
+        ans=max(height(root->left),height(root->right));
+        return ans+1;
+    }
+    bool isBalanced(TreeNode* root) {
+        bool ans=true;
+        if(!root)   return true;
+        int diff=height(root->left)-height(root->right);
+        if(abs(diff)<=1){
+            ans=true;
+        }
+        else {
+            return false;
+        }
+        
+        return isBalanced(root->left) && isBalanced(root->right);
+        
+    }
+    
+    
+    //method 2 using queue 80%
+        int height(TreeNode *root){
+        int ans=0;
+        if(!root)   return ans;
+        ans=max(height(root->left),height(root->right));
+        return ans+1;
+    }
+    bool isBalanced(TreeNode* root) {
+        if(!root)   return true;
+        queue<TreeNode*>q;
+        q.push(root);
+        while(!q.empty()){
+            TreeNode *temp=q.front();
+            q.pop();
+            int diff=height(temp->left)-height(temp->right);
+            if(abs(diff)>1) return false;
+            if(temp->left)  q.push(temp->left);
+            if(temp->right) q.push(temp->right);
+        }
+        return true;
+    }
+    
