@@ -1,0 +1,75 @@
+//seriously hectic method-brute force commented on -old
+    ListNode* deleteDuplicates(ListNode* head) {
+    
+    
+    ////commeted-old code
+    
+      /*  if(!head || !head->next)    return head;
+        ListNode *a=head;
+        while(a!=NULL && a->val!=a->next->val){
+            int x=a->val;
+            while(a!=NULL && a->val==x){
+                a=a->next;
+            }
+            head=a;
+        }
+        if(!head || !head->next)    return head;
+        ListNode *temp=a->next;
+        while(a->next->next){
+            if(a->next->val==a->next->next->val){
+                while(temp!=NULL && temp->val==a->next->val){
+                    temp=temp->next;
+                }
+                a->next=temp;
+            }
+            else
+                a=a->next;
+                temp=temp->next;
+        }
+        return head;
+        */
+    
+    
+    
+    ///now new code  
+    
+        if(!head)   return NULL;
+        ListNode *nh=NULL;
+        ListNode *tail=NULL;
+        ListNode *tn=head;
+        while(tn){
+            if(nh==NULL){
+                if(isUnique(tn)){
+                    //cout<<tn->val<<endl;
+                    nh=tn;
+                    tail=nh;
+                    tn=tn->next;
+                }
+                else{
+                    while(tn->next && tn->next->val==tn->val)   tn=tn->next; 
+                    tn=tn->next;
+                }
+            }
+            else{
+                if(isUnique(tn)){
+                    cout<<tn->val<<endl;
+                    tail->next=tn;
+                    tail=tail->next;
+                    tn=tn->next;
+                }
+                else{
+                    while(tn->next && tn->next->val==tn->val)   tn=tn->next; 
+                    tn=tn->next;
+                }
+            }
+        }
+        if (tail)   tail->next=tn;
+        return nh;
+        
+    }
+    bool isUnique(ListNode *tn){
+        if(tn->next && tn->next->val!=tn->val)   return true;
+        if(!tn->next)   return true;
+        return false;
+        
+    }
