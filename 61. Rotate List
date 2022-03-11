@@ -1,0 +1,28 @@
+   //basic solution 33% 
+   ListNode* rotateRight(ListNode* head, int k) {
+        if(!head || !head->next) return head;
+        ListNode *temph=head;
+        ListNode*prev=head;
+        int length=0;
+        while(temph){
+            temph=temph->next;
+            length++;
+            //cout<<length<<endl;
+        }
+        k=k%length;
+        
+        while(k){
+            temph=head->next;
+            int preval=head->val;
+            int curval=temph->val;
+            while(temph){
+                temph->val=preval;
+                temph=temph->next;
+                preval=curval;
+                if(temph)   curval=temph->val;
+            }
+            head->val=preval;
+            --k;
+        }
+        return head; 
+    }
