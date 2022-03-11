@@ -1,0 +1,38 @@
+   //great solution 96% t=0(n),s=0(n) on  12/20/2021
+   void rotate(vector<int>& nums, int k) {
+        vector<int> ans;
+         k=k%nums.size();
+        for(int i=nums.size()-k;i<nums.size();i++){
+            ans.push_back(nums[i]);
+        }
+        for(int i=0;i<nums.size()-k;i++){
+            ans.push_back(nums[i]);
+        }
+        nums=ans;
+    }
+    
+    //insert at froint method TLE
+        void rotate(vector<int>& nums, int k) {
+        cout<<nums.size()<<endl;
+        k=k%nums.size();
+        while(k){
+            nums.insert(nums.begin(),nums[nums.size()-1]);
+            nums.pop_back();
+            k--;
+        }
+    }
+    
+    //rotate one by one tle
+        void rotate(vector<int>& nums, int k) {
+        k=k%nums.size();
+        while(k){
+            int i=nums.size()-1;
+            int temp=nums[i];
+            while(i>0){
+                nums[i]=nums[i-1];
+                i--;
+            }
+            nums[0]=temp;
+            k--;
+        }
+    }
