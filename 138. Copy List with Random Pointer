@@ -1,0 +1,56 @@
+//brute force 45% checking distan e of random node tand then traversing
+    Node* copyRandomList(Node* head) {
+        if(!head)   return NULL;
+        Node *temp=head;
+        Node *tail=head;
+        Node *nh=NULL;
+        Node *tailnew;
+        int length=0;
+        while(temp){
+            if(!nh){
+                nh=new Node (temp->val);
+                tailnew=nh;
+                temp=temp->next;
+                if(tail->next)tail=tail->next;
+                ++length;
+            }
+            else{
+                tailnew->next=new Node(temp->val);
+                tailnew=tailnew->next;
+                temp=temp->next;
+                if(tail->next)tail=tail->next;
+                ++length;
+            }
+        }
+            tail->next=head;
+            tailnew->next=nh;
+            Node *temp2=head;
+            Node *temp3=nh;
+            for(int i=0;i<length;i++){
+                int dis=0;
+                if(temp2->random){
+                    Node *check=temp2;
+                    Node *check2=temp3;
+                    while(check!=temp2->random){
+                        check=check->next;
+                        dis++;
+                    }
+                    while(dis){
+                        check2=check2->next;
+                        dis--;
+                    }
+                    temp3->random=check2;
+                }
+                temp2=temp2->next;
+                temp3=temp3->next;
+            }
+        tail->next=NULL;
+        tailnew->next=NULL;
+        return nh;
+    }
+    
+    
+    
+    
+    
+    
