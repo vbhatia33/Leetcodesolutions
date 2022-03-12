@@ -49,7 +49,24 @@
         return nh;
     }
     
-    
+    //using hashmap 89%
+        Node* copyRandomList(Node* head) {
+        if(!head)   return NULL;
+        Node *temp=head;
+        unordered_map<Node*,Node*>m;
+        while(temp){
+            m[temp]=new Node(temp->val);
+            temp=temp->next;
+        }
+        temp=head;
+        m[NULL]=NULL;
+        while(temp){
+            m[temp]->next=m[temp->next];
+            m[temp]->random=m[temp->random];
+            temp=temp->next;
+        }
+        return m[head]; 
+    }
     
     
     
