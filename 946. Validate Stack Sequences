@@ -1,0 +1,60 @@
+// 12% using stack 0(n+m)  space =0(n)
+    bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
+        int n=pushed.size();
+        int m=popped.size();
+        int i=0,j=0;
+        stack<int>s;
+        while(i<n && j<m){
+            if(i<n){
+                s.push(pushed[i]);
+                while(!s.empty() && s.top()==popped[j]){
+                    s.pop();
+                    j++;
+                }
+                i++;
+            }
+        }
+        while(j<n && !s.empty()){
+            if(popped[j]==s.top()){
+                s.pop();
+                j++;
+            }
+            else
+                return false;
+        }
+        return true;
+    }
+    
+    // a little modification in above code  //83%
+       bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
+        int n=pushed.size();
+        int m=popped.size();
+        int i=0,j=0;
+        stack<int>s;
+        while(i<n && j<m){
+                s.push(pushed[i]);
+                while(!s.empty() && s.top()==popped[j]){
+                    s.pop();
+                    j++;
+                }
+                i++;
+        }
+        return s.empty();
+    }
+    
+    
+    //best soln 0(n) and 0(1) we have modified pushed vector 67% so modified space=0(1)
+        bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
+        int i=0;
+        int j=0;
+        for(auto a:pushed){
+            pushed[i]=a;
+            i++;
+            while(i>0 and pushed[i-1]==popped[j]){
+                i--;
+                j++;
+            }
+        }
+        if(j>=popped.size()) return true;
+        return false;
+    }
