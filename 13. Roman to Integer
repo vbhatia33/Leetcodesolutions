@@ -1,0 +1,23 @@
+//using chr typecasted to array index 100%    
+    int romanToInt(string s) {
+        unordered_map<char,int>m;
+        int arr[90]{};
+        arr['I']=1;
+        arr['V']=5;
+        arr['X']=10;
+        arr['L']=50;
+        arr['C']=100;
+        arr['D']=500;
+        arr['M']=1000;
+        int sum=0;
+        sum+=arr[s[s.length()-1]];
+        for(int i=s.length()-2;i>=0;i--){
+            if(arr[s[i]]>=arr[s[i+1]]){
+                sum+=arr[s[i]];
+            }
+            else{
+                sum-=arr[s[i]];
+            }
+        }
+        return sum;
+    }
