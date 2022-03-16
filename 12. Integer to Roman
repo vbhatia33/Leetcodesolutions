@@ -1,0 +1,35 @@
+// using map 12%
+   string intToRoman(int nums) {
+        map<int,string>m{{1000,"M"},{900,"CM"},{500,"D"},{400,"CD"},{100,"C"},{90,"XC"},{50,"L"},{40,"XL"},                                 
+        {10,"X"},{9,"IX"},{5,"V"},{4,"IV"},{1,"I"}};
+            string ans="";
+            for(auto i=m.rbegin();i!=m.rend();i++){
+                int times=nums/i->first;
+                nums=nums%i->first;
+                while(times){
+                    ans=ans+i->second;
+                    times--;
+                }
+                if(nums<=0) break;
+            }
+        return ans;
+    }
+    
+    //using two arrays 40%
+       string intToRoman(int nums) {
+        //map<int,string>m{{1000,"M"},{900,"CM"},{500,"D"},{400,"CD"},{100,"C"},{90,"XC"},{50,"L"},{40,"XL"},             
+        //                    {10,"X"},{9,"IX"},{5,"V"},{4,"IV"},{1,"I"}};
+        int a[]{1000,900,500,400,100,90,50,40,10,9,5,4,1};
+        string b[]{"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
+            string ans="";
+            for(int i=0;i<13;i++){
+                int times=nums/a[i];
+                nums=nums%a[i];
+                while(times){
+                    ans=ans+b[i];
+                    times--;
+                }
+                if(nums<=0) break;
+            }
+        return ans;
+    }
