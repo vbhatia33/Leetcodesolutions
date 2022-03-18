@@ -1,0 +1,25 @@
+// using stack and  frq and last index arrays
+     string removeDuplicateLetters(string s) {
+        vector<bool>freq(26,0);
+        vector<int>last(26,-1);
+        for(int i=0;i<s.length();i++){
+            freq[s[i]-'a']=1;
+            last[s[i]-'a']=i;
+        }
+        stack<char>st;
+        for(int i=0;i<s.length();i++){
+            if(!freq[s[i]-'a'])  continue;
+            while(!st.empty() && (s[i]<st.top()) && (last[st.top()-'a']>i)){
+                freq[st.top()-'a']=1;
+                st.pop();
+            }
+            st.push(s[i]);
+            freq[s[i]-'a']=0;
+        }
+        string ans="";
+        while(!st.empty()){
+            ans=st.top()+ans;
+            st.pop();
+        }
+        return ans;
+    }
