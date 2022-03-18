@@ -1,0 +1,27 @@
+// brute force technique using boolean array 61%
+    vector<int> findDisappearedNumbers(vector<int>& nums) {
+        vector<bool>v(nums.size(),0);
+        for(int i=0;i<nums.size();i++){
+            v[nums[i]-1]=1;
+        }
+        vector<int>ans;
+        for(int i=0;i<v.size();i++){
+            if(v[i]==0) ans.push_back(i+1);
+        }
+        return ans;
+    }
+    
+    // using negation technique 92%
+        vector<int> findDisappearedNumbers(vector<int>& nums) {
+        int tI;
+        for(int i=0;i<nums.size();i++){
+            tI=nums[i]<0?-nums[i]-1:nums[i]-1;
+            nums[tI]=nums[tI]<0?nums[tI]:-nums[tI];
+        }
+        vector<int> ans;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]>0)   ans.push_back(i+1);
+        }
+        return ans;
+    }
+    
