@@ -23,3 +23,28 @@
         }
         return ans;
     }
+    
+    
+    
+    // same method just used string as stack //73 % reduced space complexity
+         string removeDuplicateLetters(string s) {
+        vector<bool>freq(26,0);
+        vector<int>last(26,-1);
+        for(int i=0;i<s.length();i++){
+            freq[s[i]-'a']=1;
+            last[s[i]-'a']=i;
+        }
+        stack<char>st;
+        string ans="";
+        for(int i=0;i<s.length();i++){
+            if(!freq[s[i]-'a'])  continue;
+            while(ans.length() && (s[i]<ans[ans.size()-1]) && (last[ans[ans.size()-1]-'a']>i)){
+                freq[ans[ans.size()-1]-'a']=1;
+                ans.pop_back();
+            }
+            ans.push_back(s[i]);
+            freq[s[i]-'a']=0;
+        }
+  
+        return ans;
+    }
