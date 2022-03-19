@@ -1,0 +1,69 @@
+// using hashmap  TLE
+    vector<int>vec;
+    unordered_map<int,int>count;
+    int nI;
+    
+    int mostfreq(){
+        int most=0;
+        for(auto i=count.begin();i!=count.end();i++){
+            if (most<i->second){
+                most=i->second;
+            }
+        }
+        return most;
+    }
+    
+public:
+    FreqStack() {
+        nI=0;
+    }
+    
+    void push(int val) {
+        count[val]++;
+        nI++;
+        vec.push_back(val);
+    }
+    
+    int pop() {
+        int target=mostfreq();
+        int i=vec.size()-1;
+        while(i>=0){
+            if(count[vec[i]]==target)   break;
+            i--;
+        }
+        int ans=vec[i];
+        count[vec[i]]--;
+        vec.erase(vec.begin()+i);
+        nI--;
+        return ans;
+        
+    }
+    
+    
+    
+    //using priority queue and a vector inside it   5%
+    class FreqStack {
+    priority_queue<vector<int>>pq;
+    int index;
+    unordered_map<int,int>m;
+public:
+    FreqStack() {
+        index=0;
+    }
+    
+    void push(int val) {
+        m[val]++;
+        vector<int>v{m[val],index,val};
+        index++;
+        pq.push(v);
+    }
+    
+    int pop() {
+        int ans=pq.top()[2];
+        m[ans]--;
+        //index--;
+        pq.pop();
+        return ans;
+        
+    }
+};
