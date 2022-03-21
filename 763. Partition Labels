@@ -1,0 +1,22 @@
+// method checking last index of substring elements and then iterating
+//85 % and 96 % 0(n) ans 0(26)
+    vector<int> partitionLabels(string s) {
+        vector<int> ans;
+        vector<int>index(26,-1);
+        for(int i=0;i<s.length();i++){
+            index[s[i]-'a']=i;
+        }
+        int i=0;
+        while(i<s.length()){
+            int count=0;
+            int tillindex=index[s[i]-'a'];
+            while(i<=tillindex){
+                tillindex=max(tillindex,index[s[i]-'a']);
+                count++;
+                i++;
+            }
+            ans.push_back(count);
+        }
+        
+        return ans;
+    }
