@@ -1,0 +1,28 @@
+// TLE SOLUTION
+    string getSmallestString(int n, int k) {
+        string ans="";
+        while(n>=1 and k>=0){
+            int p=(k-n+1)/26>=1?26:(k-n+1)%26;
+            char x='a'+p-1;
+            ans=x+ans;
+            k=k-p;
+            n--;
+        }
+        return ans;
+    }
+    
+    
+    //using greed ,initialize the string of size n all 'a' ans then iterate from behind
+        string getSmallestString(int n, int k) {
+        
+        string ans(n,'a');
+        k-=n;
+        int i=n-1;
+        while(k>0){
+            int y=min(25,k);
+            ans[i]+=y;
+            k=k-y;
+            --i;
+        }
+        return ans;
+    }
