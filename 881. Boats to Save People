@@ -1,0 +1,55 @@
+// brute force //tle
+    int numRescueBoats(vector<int>& p, int limit) {
+        int count=0;
+        for(int i=0;i<p.size();i++){
+            if(p[i]>limit)  continue;
+            else if(p[i]==limit){
+                count++;
+                p[i]=limit+1;
+            }
+            else{
+                int mi=-1;
+                int currindex=-1;
+                for(int j=i+1;j<p.size();j++){
+                    if(p[i]+p[j]<=limit){
+                        currindex=j;
+                        mi=(mi==-1?currindex:mi);
+                        mi=p[currindex]>p[mi]?currindex:mi;
+                    }
+                    
+                }
+                if(mi!=-1){
+                    count++;
+                    p[mi]=limit+1;
+                    p[i]=limit+1;
+                }
+                else{
+                    count++;
+                    p[i]=limit+1;
+                }
+            }
+        }
+        return count;
+    }
+    
+    
+    //93 % using sorting and two pointers
+        int numRescueBoats(vector<int>& p, int limit) {
+        int s=0;
+        int count=0;
+        int e=p.size()-1;
+        sort(p.begin(),p.end());
+        while(s<e){
+            if(p[s]+p[e]<=limit){
+                count++;
+                s++;
+                e--;
+            }
+            else{
+                count++;
+                e--;
+            }
+        }
+        if(s==e)    count++;
+        return count;
+    }
