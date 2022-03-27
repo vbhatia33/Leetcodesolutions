@@ -1,0 +1,22 @@
+//strivers solution
+    void helper(vector<int>&c,int t,int n,vector<vector<int>>&ans,vector<int>&v,int index){
+        if(t==0){
+            ans.push_back(v);
+            return ;
+        }
+        for(int i=index;i<n;i++){
+            if(i>index and c[i]==c[i-1])    continue;
+            if(c[i]>t) break;
+            v.push_back(c[i]);
+            helper(c,t-c[i],n,ans,v,i+1);
+            v.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum2(vector<int>& c, int t) {
+        vector<int>v;
+        vector<vector<int>>ans;
+        sort(c.begin(),c.end());
+        int i=0;
+        helper(c,t,c.size(),ans,v,i);
+        return ans;
+    } 
