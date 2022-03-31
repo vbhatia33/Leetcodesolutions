@@ -1,0 +1,43 @@
+
+    bool helper(TreeNode *root,long long min ,long long max){
+        if(!root)   return true;
+        bool a=true;
+        if(root->val>min and root->val<max)   a=true;
+        else return false;
+        
+        if( helper(root->left,min,root->val)) a=true;
+        else return false;
+        
+        if( helper(root->right,root->val,max))  a=true;
+        else return false;
+        
+        return a;
+        
+    }
+    bool isValidBST(TreeNode* root) {
+        return helper(root,-2147483649,2147483648);
+    }
+    
+    
+   
+   //solution using previous node
+        TreeNode* prev=NULL;
+    bool isValidBST(TreeNode* root) {
+        if(!root)   return true;
+        bool ans=true;
+        ans=isValidBST(root->left);
+        if(!ans)    return false;
+        
+        if(prev==NULL){  
+            prev=root;  
+        }
+        else{
+            ans=root->val>prev->val;
+            prev=root;
+        }
+        
+        if(!ans)    return false;
+        
+        ans=isValidBST(root->right);
+        return ans;
+    }
