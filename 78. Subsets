@@ -1,0 +1,55 @@
+//using powerset(bit manipulation) 68%
+    vector<vector<int>> subsets(vector<int>& nums) {
+        int n=nums.size();
+        vector<int>v;
+        vector<vector<int>>ans;
+        for(int i=0;i<pow(2,n);i++){
+            int h=i;
+            for(int j=0;j<n;j++){
+                if(h>>j&1)  v.push_back(nums[j]);
+            }
+            ans.push_back(v);
+            v.erase(v.begin(),v.end());
+        }
+        return ans;
+    }
+    
+    //method 2 using traditional popin popout 68%
+        void helper(vector<int>&nums,int n,vector<vector<int>>&ans,vector<int>&v,int i){
+        if(i==n){
+            ans.push_back(v);
+            return;
+        }
+        v.push_back(nums[i]);
+        helper(nums,n,ans,v,i+1);
+        v.pop_back();
+        helper(nums,n,ans,v,i+1);
+        return;
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>>ans;
+        vector<int>v;
+        helper(nums,nums.size(),ans,v,0);
+        return ans;
+    }
+    
+    
+    //using for loop and backtrack 
+        void helper(vector<int>&nums,int n,vector<vector<int>>&ans,vector<int>&v,int ind){
+        ans.push_back(v);
+        for(int i=ind;i<n;i++){
+            v.push_back(nums[i]);
+            helper(nums,n,ans,v,i+1);
+            v.pop_back();
+        }
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>>ans;
+        vector<int>v;
+        helper(nums,nums.size(),ans,v,0);
+        return ans;
+    }
+    
+    
+    
+    
