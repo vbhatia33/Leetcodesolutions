@@ -1,0 +1,26 @@
+// using two pointers  //hard question 
+    void nextPermutation(vector<int>& nums) { 
+        int pivot=-1;
+        int i=nums.size()-1;
+        for(;i>0;i--){
+            if(nums[i]>nums[i-1]){
+                pivot=i-1;
+                break;
+            }
+        }
+        if(pivot==-1){
+            reverse(nums.begin(),nums.end());
+            return;
+        }
+        int up=INT_MAX;
+        int bound=-1;
+        for(int j=pivot;j<nums.size();j++){
+            if(nums[j]>nums[pivot] and nums[j]<=up){
+                up=nums[j];
+                bound=j;
+            }
+        }
+        swap(nums[bound],nums[pivot]);
+        reverse(nums.begin()+pivot+1,nums.end());
+        return;
+    }
