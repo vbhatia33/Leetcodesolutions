@@ -1,0 +1,54 @@
+// basic approach 
+    ListNode* swapNodes(ListNode* head, int k) {
+        ListNode *o=head;
+        ListNode *t=head;
+        int n=0;
+        while(t && t->next){
+            o=o->next;
+            t=t->next->next;
+            n=n+2;
+        }
+        
+        if(t)   n++;
+        int small=min(k,n-k+1);
+        int big=max(k,n-k+1);
+        int s=small-1;
+        int b=big-(n/2+1);
+        t=head;
+        while(s||b){
+            if(s){
+                t=t->next;
+                s--;
+            }
+            if(b){
+                o=o->next;
+                b--;
+            }
+        }
+        swap(t->val,o->val);
+        return head;  
+    }
+    
+    // better solution - when dummy reaches kth we start another at head , when dummy reaches end kth reaches end-k
+        ListNode* swapNodes(ListNode* head, int k) {
+        if(!head or !head->next)    return head;
+        ListNode *dummy=head;
+        ListNode *one =NULL;
+        ListNode *two=NULL;
+        k=k-1;
+        while(dummy){
+            if(k==0){
+                one=dummy;
+                two=head;
+                dummy=dummy->next;
+                k--;
+            }
+            else{
+                if(two) two=two->next;
+                dummy=dummy->next;
+                k--;
+            }
+        }
+        swap(one->val,two->val);
+        return head;
+    }
