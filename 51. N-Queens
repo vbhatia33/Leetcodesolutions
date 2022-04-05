@@ -1,0 +1,90 @@
+//using iterative is valid function
+    bool valid(int row,int col,int n,vector<string>&v){
+        //for row
+        int i=row,j=col;
+        while(j>=0){
+            if(v[i][j]=='.'){
+                j--;
+            }
+            else return false;
+        }
+        //for lower diaginal
+         i=row,j=col;
+        while(i<n && j>=0){
+            if(v[i][j]=='.') {
+                i++;
+                j--;
+                
+            }
+            else return false;
+            
+        }
+        //fow upper dia
+        i=row,j=col;
+        while(i>=0 && j>=0){
+            if(v[i][j]=='.'){
+                i--;
+                j--;
+            }
+            else return false;
+            
+        }
+        return true;
+    }
+    
+    void helper(vector<vector<string>>&ans,vector<string>&v,int n,int col){
+        if(col==n){
+            ans.push_back(v);
+            return;
+        }
+        for(int row=0;row<n;row++){
+            if(valid(row,col,n,v)){
+                v[row][col]='Q';
+                helper(ans,v,n,col+1);
+                v[row][col]='.';
+            }
+        }
+    }
+    vector<vector<string>> solveNQueens(int n) {
+        string s(n,'.');
+        vector<string>v(n,s);
+        vector<vector<string>>ans;
+        helper(ans,v,n,0);
+        return ans;
+    }
+    
+    
+    
+    ///using frequency array
+        bool valid(int n,int row,int col,vector<bool>&r,vector<bool>&ld,vector<bool>&ud){
+        return !r[row] && !ld[row+col] &&   !ud[2*n-(row-col)];
+    }
+    void helper(vector<vector<string>>&ans,int n,vector<string>&v,int col,vector<bool>r,vector<bool>&ld,vector<bool>&ud){
+        if(col==n){
+            ans.push_back(v);
+            return;
+        }
+        for(int row=0;row<n;row++){
+            if(valid(n,row,col,r,ld,ud)){
+                v[row][col]='Q';
+                r[row]=1;
+                ld[row+col]=1;
+                ud[2*n-(row-col)]=1;
+                helper(ans,n,v,col+1,r,ld,ud);
+                r[row]=0;
+                ld[row+col]=0;
+                ud[2*n-(row-col)]=0;
+                v[row][col]='.';
+            }
+        }
+    }
+    vector<vector<string>> solveNQueens(int n) {
+        string ss(n,'.');
+        vector<string>v(n,ss);
+        vector<vector<string>>ans;
+        vector<bool>r(n,0);
+        vector<bool>ld(2*(n),0);
+        vector<bool>ud(3*(n)+1,0);
+        helper(ans,n,v,0,r,ld,ud);
+        return ans;
+    }
