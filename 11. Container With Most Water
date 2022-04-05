@@ -1,0 +1,33 @@
+//TLE but all test case passed
+    int maxArea(vector<int>&h) {
+        int n=h.size();
+        int m=0;
+        int curr;
+        for(int i=0;i<n;i++){
+            for(int j=n-1;j>i;j--){
+                if(h[j]>=h[i]){
+                    curr=min(h[i],h[j])*(j-i);
+                    m=max(curr,m);
+                    break;
+                }
+                curr=min(h[i],h[j])*(j-i);
+                m=max(curr,m);
+            }
+        }
+        return m; 
+    }
+    
+    // best soln 44% this is a 2 pointer approach , it means we have to reduce or increase that index which has smaller height 
+    //because either we want greater height or  greater width
+        int maxArea(vector<int>& h) {
+        int i=0,j=h.size()-1;
+        int m=0;
+        while(i<=j){
+            int curr=min(h[i],h[j])*(j-i);
+            m=max(m,curr);
+            if(h[i]<h[j])   i++;
+            else if(h[j]<h[i])  j--;
+            
+        }
+        return m;
+    }
