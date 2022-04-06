@@ -1,0 +1,51 @@
+//tle 
+    int threeSumMulti(vector<int>& arr, int target) {
+        int num=0;
+        int m = 1000000007;
+        int i,j,k;
+        int n=arr.size()-1;
+        for(int ind=0;ind<arr.size();ind++){
+            for(int in=n;in>ind;in--){
+                i=arr[ind];
+                k=arr[in];
+                j=target-i-k;
+                int c=0;
+                for(int p=ind+1;p<in;p++){
+                    if(arr[p]==j)   c++;
+                }
+                num=(num+c)%m;
+            }
+        }
+        return num; 
+    }
+    
+    ///    int threeSumMulti(vector<int>& arr, int target) {
+        long long ans=0;
+        vector<long>c(101,0);
+        for(int i=0;arr.size();i++){
+            c[arr[i]]=c[arr[i]]+1;
+        }
+        for(int i=0;i<101;i++){
+            for(int j=0;j<101;j++){
+                int k=target-i-j;
+                if(k<0 || k>100)    continue;
+                else if(c[i]==0||c[j]==0||c[k]==0)   continue;
+                else if(i==j && i==k){
+                    ans+=c[i]*(c[i]-1)*(c[i]-2)/6;
+                    ans%=1000000007;
+                }
+                else if(i==j&& i!=k){
+                    ans+=(c[i]*(c[i]-1))*c[k]/2;
+                    ans%=1000000007;
+                }
+                else if(i<j<k){
+                    ans+=c[i]*c[j]*c[k];
+                    ans%=1000000007;
+                }
+                else if(i!=j && j==k){
+                    ans+=(c[j]*(c[j]-1))*c[i]/2;
+                }
+            }
+        }
+        return ans;
+    }
