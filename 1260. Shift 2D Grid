@@ -1,0 +1,41 @@
+
+   vector<vector<int>> shiftGrid(vector<vector<int>>& grid, int k) {
+        int m=grid.size();
+        int n=grid[0].size();
+        //k=k%(m*n);
+        while(k){
+            int last=grid[m-1][n-1];
+            for(int i=m*n-1;i>=1;i--){
+                grid[i/n][i%n]=grid[(i-1)/n][(i-1)%n];
+            }
+            grid[0][0]=last;
+            --k;
+        }
+        return grid;
+    }
+    
+    
+    //method flat array and then reverse and again convert into 2d (89%)
+        vector<vector<int>> shiftGrid(vector<vector<int>>& grid, int k) {
+        int m=grid.size();
+        int n=grid[0].size();
+        vector<int>v;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                v.push_back(grid[i][j]);
+            }
+        }
+        k=k%v.size();
+        reverse(v.begin(),v.end());
+        reverse(v.begin(),v.begin()+k);
+        reverse(v.begin()+k,v.end());
+        //return v;
+        
+        for(int i=0,p=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                grid[i][j]=v[p++];
+            }
+        }
+        return grid;
+        
+    }
