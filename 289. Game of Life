@@ -1,0 +1,84 @@
+// extra space solution
+    int live(vector<vector<int>>&board ,int i,int j,int m,int n){
+        int live=0;
+        for(int p=-1;p<=1;p++){
+            for(int q=-1;q<=1;q++){
+                int currow= i+p;
+                int curcol=j+q;
+                if(currow>=0 and currow<m and curcol>=0 and curcol<n){
+                    if(currow==i and curcol==j) continue;
+                    if(board[currow][curcol]==1)    live++;
+                }
+            } 
+        }
+        return live;
+    }
+    void gameOfLife(vector<vector<int>>& board) {
+        int m=board.size();
+        int n=board[0].size();
+        vector<vector<int>>ans(m,(vector<int>(n,0)));
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(board[i][j]==0){
+                    if(live(board,i,j,m,n)==3){
+                        ans[i][j]=1;
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else{
+                    if(live(board,i,j,m,n)<2)  ans[i][j]=0;
+                    else if(live(board,i,j,m,n)==2 || live(board,i,j,m,n)==3)   ans[i][j]=1;
+                    else    ans[i][j]=0;
+                }
+            }
+        }
+        board=ans;
+    }
+    
+    
+    //inplace solution
+        int live(vector<vector<int>>&board ,int i,int j,int m,int n){
+        int live=0;
+        for(int p=-1;p<=1;p++){
+            for(int q=-1;q<=1;q++){
+                int currow= i+p;
+                int curcol=j+q;
+                if(currow>=0 and currow<m and curcol>=0 and curcol<n){
+                    if(currow==i and curcol==j) continue;
+                    if(board[currow][curcol]>0)    live++;
+                }
+            } 
+        }
+        return live;
+    }
+    void gameOfLife(vector<vector<int>>& board) {
+        int m=board.size();
+        int n=board[0].size();
+        //vector<vector<int>>ans(m,(vector<int>(n,0)));
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(board[i][j]==0){
+                    if(live(board,i,j,m,n)==3){
+                        board[i][j]=-1;
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else{
+                    if(live(board,i,j,m,n)<2)  board[i][j]=3;
+                    else if(live(board,i,j,m,n)==2 || live(board,i,j,m,n)==3)   board[i][j]=1;
+                    else    board[i][j]=3;
+                }
+            }
+        }
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(board[i][j]==-1) board[i][j]=1;
+                if(board[i][j]==3)  board[i][j]=0;
+            }
+        }
+        //board=ans;
+    }
