@@ -1,0 +1,23 @@
+// simple recursion
+    int s=0;
+    int inordersum(TreeNode *root){
+        int sum=0;
+        if(!root)   return 0;
+        sum+=inordersum(root->left);
+        sum+=root->val;
+        sum+=inordersum(root->right);
+        return sum;
+    }
+    TreeNode* convertBST(TreeNode* root) {
+        s=inordersum(root);
+        //cout<<sum<<endl;
+        helper(root);
+        return root;
+    }
+    void helper(TreeNode *root){
+        if(!root)   return;
+        helper(root->left);
+        s=s-root->val;
+        root->val=s+root->val;
+        helper(root->right);
+    }
