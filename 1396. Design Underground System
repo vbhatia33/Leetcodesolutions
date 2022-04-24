@@ -1,0 +1,58 @@
+//no reason for this to throw error ,check it again
+class UndergroundSystem {
+        unordered_map<int,pair<string,int>>c;
+        unordered_map<pair<string,string>,int>avg;
+public:
+    UndergroundSystem() {
+       cout<<"I am useless";
+    }
+    
+    void checkIn(int id, string stationName, int t) {
+        pair<string,int>in(stationName,t);
+        c[id]=in;
+    }
+    
+    void checkOut(int id, string stationName, int t) {
+        string b=c[id].first;
+        pair<string,string>out(b,stationName);
+        avg[out]=t-c[id].second;
+    }
+    
+    double getAverageTime(string startStation, string endStation) {
+        pair<string,string>av(startStation,endStation);
+        return avg[av];
+    }
+    
+    ~UndergroundSystem(){};
+};
+
+
+//correct ans
+    unordered_map<int, pair<string, int>> checkInMap; // Uid - {StationName, Time}
+    unordered_map<string, pair<double, int>> routeMap; // RouteName - {TotalTime, Count}
+    
+    UndergroundSystem() {}
+    
+    void checkIn(int id, string stationName, int t) {
+        pair<string,int>in(stationName,t);
+        checkInMap[id]=in;
+    }
+    
+    void checkOut(int id, string stationName, int t) {
+        double taken=t-checkInMap[id].second;
+        string route=checkInMap[id].first+"_"+stationName;
+        if(routeMap.count(route)){
+            routeMap[route].first+=taken;
+            routeMap[route].second++;
+        }
+        else{
+            pair<double,int>p(taken,1);
+            routeMap[route]=p;
+        }
+        
+    }
+    
+    double getAverageTime(string startStation, string endStation) {
+        string r=startStation+"_"+endStation;
+        return routeMap[r].first/routeMap[r].second;
+    }
