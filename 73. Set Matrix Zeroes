@@ -30,3 +30,45 @@
         }
         return;
     }
+    
+    
+    0(1) solution using the forst col and first row as container
+        void setrow(vector<vector<int>>&m,int setr,int r,int c,int start){
+        for(int i=start;i<c;i++){
+            m[setr][i]=0;
+        }
+    }
+    void setcol(vector<vector<int>>&m,int setc,int r,int c,int start){
+        for(int i=start;i<r;i++){
+            m[i][setc]=0;
+        }
+    }
+    void setZeroes(vector<vector<int>>& matrix) {
+        int row=matrix.size();
+        int col=matrix[0].size();
+        bool r=false;
+        bool c=false;
+        for(int i=0;i<col;i++){
+            if(matrix[0][i]==0) r=true;
+        }
+        for(int j=0;j<row;j++){
+            if(matrix[j][0]==0) c=true;
+        }
+        
+        for(int i=1;i<row;i++){
+            for(int j=1;j<col;j++){
+                if(matrix[i][j]==0){
+                    matrix[0][j]=0;
+                    matrix[i][0]=0;
+                }
+            }
+        }
+        for(int i=1;i<row;i++){
+            if(matrix[i][0]==0) setrow(matrix,i,row,col,1);
+        }
+        for(int i=1;i<col;i++){
+            if(matrix[0][i]==0) setcol(matrix,i,row,col,1);
+        }
+        if(r)   setrow(matrix,0,row,col,0);
+        if(c)   setcol(matrix,0,row,col,0);
+    }
