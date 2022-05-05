@@ -1,0 +1,33 @@
+// basic trick remove all elements from primary queue and then take it back after insertion
+    void push(int x) {
+        if(q1.empty()) {
+            q1.push(x);
+            return;
+        }
+        else{
+            while(!q1.empty()){
+                q2.push(q1.front());
+                q1.pop();
+            }
+            q1.push(x);
+            while(!q2.empty()){
+                q1.push(q2.front());
+                q2.pop();
+            }
+            return;
+        }
+    }
+    
+    int pop() {
+        int top=q1.front();
+        q1.pop();
+        return top;
+    }
+    
+    int top() {
+        return q1.front();
+    }
+    
+    bool empty() {
+        return q1.size()==0;
+    }
