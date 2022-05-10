@@ -1,0 +1,26 @@
+// method 1 backtrack 100%
+    void helper(vector<string>&given,vector<string>&ans,string digits,string s,int i){
+        if(i>=digits.length()){
+            if(s.length()==digits.length()) ans.push_back(s);
+            return ;
+        }
+        
+        //for(int x=i;x<digits.length();x++){
+            int num=digits[i]-'0';
+            for(int j=0;j<given[num].length();j++){
+                s.push_back(given[num][j]);
+                helper(given,ans,digits,s,i+1);
+                s.pop_back();
+            }
+            
+        //}
+        
+    }
+    vector<string> letterCombinations(string digits) {
+        vector<string>given{"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        vector<string>ans;
+        if(digits.length()==0)  return ans;
+        string s="";
+        helper(given,ans,digits,s,0);
+        return ans;
+    }
