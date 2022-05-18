@@ -1,0 +1,59 @@
+//0(n2) without window sliding
+    void empty_arr(vector<int>&arr,int n){
+        for(int i=0;i<n;i++){
+            arr[i]=0;
+        }
+    }
+    int lengthOfLongestSubstring(string s) {
+        vector<int>arr(225,0);
+        int count=0;
+        int maxc=0;
+        for(int i=0;i<s.length();i++){
+            int j=i;
+            for(;j<s.length();j++){
+                int x=s[j];
+                if(arr[x]==0){
+                    count++;
+                    maxc=max(maxc,count);
+                    arr[x]++;
+                }
+                else{
+                    empty_arr(arr,225);
+                    count=0;
+                    //arr[x]++;
+                    break;
+                }
+            }
+            if(j==s.length())   break;
+        }
+        return maxc; 
+    }
+    
+    
+    // with window sliding
+        int lengthOfLongestSubstring(string s) {
+        if(s.length()==0 || s.length()==1 )   return s.length();
+        int maxlen=INT_MIN;
+        int arr[225]{};
+        int st=0;
+        int end=0;
+        arr[s[st]]=1;
+        end++;
+        int curlen=end-st+1;
+        while(st<s.length() and end<s.length()){
+            int a=s[end];
+            if(arr[a]!=0){
+                arr[s[st]]=0;
+                //curlen=end-st+1;
+                st++;
+                //maxlen=max(maxlen,curlen);
+            }
+            else{
+                arr[a]=1;
+                curlen=end-st+1;
+                end++;
+                maxlen=max(maxlen,curlen);
+            }            
+        }
+        return maxlen;
+    }
