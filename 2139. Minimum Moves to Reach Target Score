@@ -1,0 +1,18 @@
+// iterative or greedy approach 100%
+
+     int minMoves(int t, int m) {
+        int count=0;
+        while(t>1){
+            if(t&1 || m==0){
+                if(m==0)    return t-1+count;
+                --t;
+                count++;
+            }
+            else{
+                t=t/2;
+                count++;
+                --m;
+            }
+        }
+         return count;
+    }
