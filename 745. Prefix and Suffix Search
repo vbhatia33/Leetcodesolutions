@@ -1,0 +1,27 @@
+// brute force solution //tle
+    vector<string>word;
+    WordFilter(vector<string>& words) {
+        this->word=words;
+    }
+    
+    int f(string prefix, string suffix) {
+        int p=prefix.length();
+        int s=suffix.length();
+        int currindex=-1;
+        int currlen=-1;
+        for(int i=0;i<word.size();i++){
+            string w=word[i];
+            int n=word[i].length();
+            if(p<=n and s<=n){
+                bool pre=w.substr(0,p)==prefix;
+                bool suf=w.substr(n-s,s)==suffix;
+                if(pre and suf){
+                    if(n>currlen || i>currindex){
+                        currindex=i;
+                        currlen=n;
+                    }
+                }
+            }
+        }
+        return currindex;
+    }
