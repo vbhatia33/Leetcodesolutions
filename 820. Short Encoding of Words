@@ -1,0 +1,53 @@
+// brute force approach - the idea is sort the array by size and the check for every single other element if it is substring of current element 0(nlogn +n^2) TLE
+    bool static comp(string s1,string s2){
+        return s1.length()>s2.length();
+    }
+    int minimumLengthEncoding(vector<string>& words) {
+        sort(words.begin(),words.end(),comp);
+        string ans="";
+        int arr_size=words.size();
+        int check[arr_size];
+        memset(check,0,sizeof(check));
+        for(int i=0;i<words.size();i++){
+            if(!check[i]){
+                string longer=words[i];
+                int n=longer.length();
+                for(int j=i+1;j<words.size();j++){
+                    if(!check[j]){
+                        string curr=words[j];
+                        if(longer.substr(n-curr.size(),curr.size())==curr){
+                            check[j]=1;
+                        }      
+                    }
+                }
+                ans+=longer+"#";
+            }
+        }
+        return ans.size();
+    }
+    
+    
+    // method 2 using set - sort the array by its size and then delete the substring of bigger word from primary set
+    
+        bool static comp(string s1,string s2){
+        return s1.length()>s2.length();
+    }
+    int minimumLengthEncoding(vector<string>& words) {
+        unordered_set<string>s1;
+        unordered_set<string>s2;
+        sort(words.begin(),words.end(),comp);
+        for(int i=0;i<words.size();i++) s1.insert(words[i]);
+        s2=s1;
+        for(auto ele:s1){
+            int n=ele.length();
+            for(int i=1;i<n;i++){
+               string dub= ele.substr(i,n-i);
+                if(s2.count(dub))   s2.erase(dub);
+            }
+        }
+        int ans=0;
+        for(auto ele:s2){
+            ans+=ele.length()+1;
+        }
+        return ans;
+    }
