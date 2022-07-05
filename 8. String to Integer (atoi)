@@ -1,0 +1,42 @@
+// MOST EXHAUSTING CODE EVER
+class Solution {
+public:
+   // 00 : 44 : 40
+    //01 : 02 : 32
+    int myAtoi(string s) {
+        int sym=0;
+        bool neg=false;
+        int start=0;
+        int end=0;
+        long long  ans=0;
+        while(s[start]==' ')    start++;
+        if(s[start]=='+' || s[start]=='-'){
+            if (s[start]=='-')   neg=true;
+            sym++;
+            start++;
+        }
+        int num=s[start];
+        if(num<48 || num>57)    return 0;
+        end=start;
+        while(s[end]>=48 and s[end]<=57 and end<s.length())    end++;
+        while(s[start]=='0' and start<s.length())   start++;
+        end--;
+        //cout<<s.substr(start,end-start+1)<<endl;;
+        long long  factor=1;
+       while(end>=start and factor<1000000000000000){
+           int digit=s[end]-'0';
+           //cout<<digit<<endl;
+           //if(ans>=INT_MAX/10 and end>=start)    return neg?INT_MIN:INT_MAX;
+          // cout<<ans<<endl;
+           if(ans>INT_MAX and neg)  return INT_MIN;
+           if(ans>=INT_MAX and !neg)    return INT_MAX;
+           ans=digit*factor+ans;
+           factor=factor*10;
+           end--;
+       }
+        cout<<ans<<endl;
+        if(ans>INT_MAX and neg || (factor>=1000000000000000 and neg))  return INT_MIN;
+        if(ans>=INT_MAX and !neg || (factor>=1000000000000000 and !neg))    return INT_MAX;
+        return neg?ans*-1:ans;
+    }
+};
