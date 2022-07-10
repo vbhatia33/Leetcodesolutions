@@ -1,0 +1,59 @@
+// brute force TLE
+    //02 : 38 : 28
+    int ans=0;
+    void helper(vector<int>& nums,int k,int n,int curr,int score){
+        if(curr>=n-1){
+            if(curr==n-1)   ans=max(ans,score);
+            return;
+        }
+        for(int j=1;j<=k;j++){
+            if(curr+j<n){
+                helper(nums,k,n,curr+j,score+nums[curr+j]);
+            }
+        }
+        
+    }
+    int maxResult(vector<int>& nums, int k) {
+        helper(nums,k,nums.size(),0,nums[0]);
+       
+        return ans;
+        
+    }
+    
+// bottom up or naive dp TLE
+    int maxResult(vector<int>& nums, int k) {
+        int n=nums.size();
+        vector<int>dp(n,INT_MIN);
+        //memset(dp,INT_MIN,sizeof(dp));
+        dp[0]=nums[0];
+        
+        // the idea is max score at i = max score at (i-k to i-1)+score[i] so ot will have time colplexity of n*k
+        
+        for(int i=1;i<n;i++){
+            for(int j=k;j>=1;j--){
+                if(i-j>=0)  dp[i]=max(dp[i],nums[i]+dp[i-j]);
+            }
+        }
+        //for(auto i:dp)  cout<<i<<endl;
+        return dp[n-1];
+    }
+    
+    
+    // OPTIMIZED DP using priority queue , we have reduced the time to find max in previous k places from 0(k) to 0(logk) using priority queue
+    
+        typedef pair<int,int> pair;
+    int maxResult(vector<int>& nums, int k) {
+        int n=nums.size();
+        vector<int>dp(n,INT_MIN);
+        //memset(dp,INT_MIN,sizeof(dp));
+        priority_queue<pair>pq;
+        dp[0]=nums[0];
+        pq.push({dp[0],0});
+        for(int i=1;i<n;i++){
+            while(!pq.empty() and pq.top().second<i-k)    pq.pop();
+            dp[i]=(!pq.empty())?nums[i]+pq.top().first:nums[i]+nums[i-1];
+            pq.push({dp[i],i});
+        }
+        //for(auto i:dp)  cout<<i<<endl;
+        return dp[n-1];
+    }
